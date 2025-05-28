@@ -22,14 +22,12 @@ library(targets)
 # setup
 # n_crew_workers <- 5 # set the number of workers for parallel processing
 osm_pbf_download_dir <- "data/input/osm"
-osm_pbf_combined_data_dir <- "data/proc/osm/"
 gridded_pop_input_dir <- "data/input/gridded-pop/"
 gridded_pop_data_dir <- "data/proc/gridded-pop/"
 
 # list of directories to be created
 dirs <- c(
   osm_pbf_download_dir,
-  osm_pbf_combined_data_dir,
   gridded_pop_input_dir,
   gridded_pop_data_dir
 )
@@ -41,7 +39,7 @@ fs::dir_create(dirs, recurse = TRUE)
 options("global.nthreads.import" = 4)
 options("global.r5_jar_cache_path" = "bin/r5/")
 options("global.r5_build_graph_memory_gb" = 6)
-options("global.r5_nthreads.routing" = parallelly::availableCores())
+options("global.r5_nthreads.routing" = parallelly::availableCores() - 2)
 
 
 # Set target options:
@@ -110,14 +108,15 @@ list(
   ),
 
   # get elevation data
-  # tar_target(
-  #   name = elevation_data,
-  #   packages = c("elevatr", "terra", "fs"),
-  #   command = download_elevation_data(
-  #     study_area_boundaries = catalunya_boundaries
-  #   ),
-  #   format = "file"
-  # ),
+  tar_target(
+    name = elevation_data,
+    packages = c("elevatr", "terra", "fs"),
+    command = download_elevation_data(
+      study_area_boundaries = madrid_boundaries,
+      elevation_raster_save_dir = osm_pbf_download_dir
+    ),
+    format = "file"
+  ),
 
   # prepare Java environment for r5r router
   tar_target(
@@ -138,19 +137,19 @@ list(
   ),
 
   # prepare the routing data
-  # tar_target(
-  #   name = r5_graph_files,
-  #   # packages = c("callr", "rJavaEnv", "fs", "r5r"),
-  #   packages = c("r5r", "rJavaEnv", "fs"),
-  #   command = prepare_routing_data(
-  #     osm_data = osm_data,
-  #     elevation_data = elevation_data,
-  #     java_home = java_home,
-  #     r5_jar = r5_jar,
-  #     memory_limit_gb = getOption("global.r5_build_graph_memory_gb")
-  #   ),
-  #   format = "file"
-  # ),
+  tar_target(
+    name = r5_graph_files,
+    # packages = c("callr", "rJavaEnv", "fs", "r5r"),
+    packages = c("r5r", "rJavaEnv", "fs"),
+    command = prepare_routing_data(
+      osm_data = osm_data,
+      elevation_data = elevation_data,
+      java_home = java_home,
+      r5_jar = r5_jar,
+      memory_limit_gb = getOption("global.r5_build_graph_memory_gb")
+    ),
+    format = "file"
+  ),
 
   # tar_target(
   #   name = trips_and_routes,

@@ -173,3 +173,32 @@ get_overture_poi <- function(
 
   return(poi_reduced)
 }
+
+
+download_elevation_data <- function(
+  study_area_boundaries,
+  elevation_raster_save_dir = "data/input/osm/"
+) {
+  # study_area_boundaries <- targets::tar_read(catalunya_boundaries)
+  elevation_data <- elevatr::get_elev_raster(
+    locations = study_area_boundaries,
+    z = 11,
+    src = "aws",
+    verbose = TRUE,
+    ncpu = 4
+  )
+  elevation_raster_save_path <- paste0(
+    elevation_raster_save_dir,
+    "/elevation.tiff"
+  )
+  if (!fs::dir_exists(dirname(elevation_raster_save_path))) {
+    fs::dir_create(dirname(elevation_raster_save_path), recurse = TRUE)
+  }
+  terra::writeRaster(
+    elevation_data,
+    elevation_raster_save_path,
+    overwrite = TRUE
+  )
+
+  return(elevation_raster_save_path)
+}
