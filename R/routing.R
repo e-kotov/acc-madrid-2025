@@ -49,6 +49,7 @@ r5r_set_cache_dir <- function(path, move = FALSE) {
 
 prepare_routing_data <- function(
   osm_data,
+  gtfs_data,
   elevation_data,
   java_home,
   r5_jar,
@@ -80,4 +81,68 @@ prepare_routing_data <- function(
   )
 
   return(r5_files)
+}
+
+calculate_routes_r5 <- function(
+  locations,
+  java_home,
+  r5_jar,
+  r5_graph_files,
+  n_threads = parallelly::availableCores(),
+  memory_limit_gb
+) {
+  # locations <- targets::tar_read(madrid_gridded_pop) |>
+  #   sf::st_point_on_surface() |>
+  #   sf::st_transform(4326)
+  # java_home <- targets::tar_read(java_home)
+  # r5_jar <- targets::tar_read(r5_jar)
+  # r5_graph_files <- targets::tar_read(r5_graph_files)
+  # n_threads <- parallelly::availableCores() -2
+  # memory_limit_gb <- 6
+
+  origins_sf <- locations |>
+    # dplyr::slice(1:5) |>
+    dplyr::select(id = GRD_ID)
+
+  destinations_sf <- locations |>
+    dplyr::slice(100:110) |>
+    dplyr::select(id = GRD_ID)
+
+  # departure times can be assumed to be the same for all trips, as we do not have traffic data anyway
+
+  rJavaEnv::java_env_set(where = "session", java_home = java_home, quiet = TRUE)
+
+  options(java.parameters = paste0("-Xmx", memory_limit_gb, "G"))
+
+  r5r_set_cache_dir(fs::path_dir(r5_jar))
+
+  r5r_core <- r5r::setup_r5(
+    data_path = fs::path_dir(r5_graph_files[[1]]),
+    verbose = TRUE
+  )
+
+  routes <- r5r::detailed_itineraries(
+    r5r_core = r5r_core,
+    origins = origins_sf,
+    destinations = destinations_sf,
+    departure_datetime = as.POSIXct(
+      "13-05-2014 09:00:00",
+      format = "%d-%m-%Y %H:%M:%S"
+    ), # does not matter, works for public transport only anyway
+    mode = c("TRANSIT", "WALK"),
+    max_trip_duration = 24 * 60, # 24 hours
+    n_threads = n_threads,
+    all_to_all = TRUE,
+    progress = TRUE,
+    drop_geometry = FALSE
+  )
+
+  mapgl::maplibre_view(routes)
+
+  trips_and_routes <- list(
+    trips = trips_row_id,
+    routes = routes
+  )
+
+  return(trips_and_routes)
 }

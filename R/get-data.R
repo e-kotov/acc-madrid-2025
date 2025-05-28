@@ -115,7 +115,7 @@ extract_gridded_pop <- function(
 
   duckspatial::ddbs_write_vector(
     conn = con,
-    data = study_area_boundaries,
+    data = study_area_boundaries |> sf::st_transform(3035),
     name = "study_area_boundaries",
     overwrite = TRUE
   )
@@ -123,7 +123,7 @@ extract_gridded_pop <- function(
   # spatial join
   DBI::dbExecute(
     con,
-    "CREATE VIEW extracted_grid AS
+    "CREATE OR REPLACE VIEW extracted_grid AS
     SELECT
       c.*  
     FROM census_gp_view AS c  
@@ -174,6 +174,21 @@ get_overture_poi <- function(
   return(poi_reduced)
 }
 
+
+copy_gtfs_data <- function(
+  input_dir = "data/input/gtfs",
+  output_dir
+) {
+  gtfs_files <- fs::dir_ls(input_dir, type = "file", glob = "*.zip")
+  fs::file_copy(gtfs_files, output_dir, overwrite = TRUE)
+  gtfs_files_at_new_path <- fs::dir_ls(
+    output_dir,
+    type = "file",
+    glob = "*.zip"
+  )
+
+  return(gtfs_files_at_new_path)
+}
 
 download_elevation_data <- function(
   study_area_boundaries,

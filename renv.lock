@@ -4,7 +4,7 @@
     "Repositories": [
       {
         "Name": "PPM",
-        "URL": "https://p3m.dev/cran/2025-05-14"
+        "URL": "https://p3m.dev/cran/2025-05-26"
       }
     ]
   },
@@ -811,6 +811,30 @@
       "URL": "https://gitlab.com/luke-tierney/codetools",
       "License": "GPL",
       "NeedsCompilation": "no",
+      "Repository": "CRAN"
+    },
+    "commonmark": {
+      "Package": "commonmark",
+      "Version": "1.9.5",
+      "Source": "Repository",
+      "Type": "Package",
+      "Title": "High Performance CommonMark and Github Markdown Rendering in R",
+      "Authors@R": "c( person(\"Jeroen\", \"Ooms\", ,\"jeroenooms@gmail.com\", role = c(\"aut\", \"cre\"), comment = c(ORCID = \"0000-0002-4035-0289\")), person(\"John MacFarlane\", role = \"cph\", comment = \"Author of cmark\"))",
+      "Description": "The CommonMark specification <https://github.github.com/gfm/> defines a rationalized version of markdown syntax. This package uses the 'cmark'  reference implementation for converting markdown text into various formats including html, latex and groff man. In addition it exposes the markdown parse tree in xml format. Also includes opt-in support for GFM extensions including tables, autolinks, and strikethrough text.",
+      "License": "BSD_2_clause + file LICENSE",
+      "URL": "https://docs.ropensci.org/commonmark/ https://ropensci.r-universe.dev/commonmark",
+      "BugReports": "https://github.com/r-lib/commonmark/issues",
+      "Suggests": [
+        "curl",
+        "testthat",
+        "xml2"
+      ],
+      "RoxygenNote": "7.3.2",
+      "Language": "en-US",
+      "Encoding": "UTF-8",
+      "NeedsCompilation": "yes",
+      "Author": "Jeroen Ooms [aut, cre] (<https://orcid.org/0000-0002-4035-0289>), John MacFarlane [cph] (Author of cmark)",
+      "Maintainer": "Jeroen Ooms <jeroenooms@gmail.com>",
       "Repository": "CRAN"
     },
     "concaveman": {
@@ -2775,6 +2799,45 @@
       "Maintainer": "Diego Hernangómez <diego.hernangomezherrero@gmail.com>",
       "Repository": "PPM"
     },
+    "mapgl": {
+      "Package": "mapgl",
+      "Version": "0.2.2",
+      "Source": "Repository",
+      "Title": "Interactive Maps with 'Mapbox GL JS' and 'MapLibre GL JS'",
+      "Date": "2025-05-23",
+      "Authors@R": "person(given = \"Kyle\", family = \"Walker\", email = \"kyle@walker-data.com\", role = c(\"aut\", \"cre\"))",
+      "Description": "Provides an interface to the 'Mapbox GL JS' (<https://docs.mapbox.com/mapbox-gl-js/guides>) and the 'MapLibre GL JS' (<https://maplibre.org/maplibre-gl-js/docs/>) interactive mapping libraries to help users create custom interactive maps in R.  Users can create interactive globe visualizations; layer 'sf' objects to create filled maps, circle maps, 'heatmaps', and three-dimensional graphics; and customize map styles and views.  The package also includes utilities to use 'Mapbox' and 'MapLibre' maps in 'Shiny' web applications.",
+      "URL": "https://walker-data.com/mapgl/",
+      "BugReports": "https://github.com/walkerke/mapgl/issues",
+      "License": "MIT + file LICENSE",
+      "Encoding": "UTF-8",
+      "RoxygenNote": "7.3.2",
+      "Depends": [
+        "R (>= 4.1.0)"
+      ],
+      "Imports": [
+        "htmlwidgets",
+        "geojsonsf",
+        "sf",
+        "rlang",
+        "htmltools",
+        "grDevices",
+        "base64enc",
+        "terra",
+        "classInt",
+        "shiny",
+        "viridisLite"
+      ],
+      "Suggests": [
+        "mapboxapi",
+        "usethis",
+        "leaflet"
+      ],
+      "NeedsCompilation": "no",
+      "Author": "Kyle Walker [aut, cre]",
+      "Maintainer": "Kyle Walker <kyle@walker-data.com>",
+      "Repository": "PPM"
+    },
     "mapview": {
       "Package": "mapview",
       "Version": "2.11.2",
@@ -3628,11 +3691,11 @@
     },
     "r5r": {
       "Package": "r5r",
-      "Version": "2.1.0",
+      "Version": "2.2.0",
       "Source": "Repository",
       "Type": "Package",
       "Title": "Rapid Realistic Routing with 'R5'",
-      "Authors@R": "c( person(\"Marcus\", \"Saraiva\", , \"marcus.saraiva@gmail.com\", role = \"aut\", comment = c(ORCID = \"0000-0001-6218-2338\")), person(\"Rafael H. M.\", \"Pereira\", , \"rafa.pereira.br@gmail.com\", role = c(\"aut\", \"cre\"), comment = c(ORCID = \"0000-0003-2125-7465\")), person(\"Daniel\", \"Herszenhut\", , \"dhersz@gmail.com\", role = \"aut\", comment = c(ORCID = \"0000-0001-8066-1105\")), person(\"Carlos Kaue Vieira\", \"Braga\", , \"kaue@kauebraga.dev\", role = \"aut\", comment = c(ORCID = \"0000-0002-6104-7297\")), person(\"Matthew Wigginton\", \"Bhagat-Conway\", , \"mwbc@unc.edu\", role = \"aut\", comment = c(ORCID = \"0000-0002-1210-2982\")), person(\"Luyu\", \"Liu\", , \"luyuliu@ufl.edu\", role = \"ctb\", comment = c(ORCID = \"0000-0002-6684-5570\")), person(\"Ipea - Institute for Applied Economic Research\", role = c(\"cph\", \"fnd\")) )",
+      "Authors@R": "c( person(\"Marcus\", \"Saraiva\", , \"marcus.saraiva@gmail.com\", role = \"aut\", comment = c(ORCID = \"0000-0001-6218-2338\")), person(\"Rafael H. M.\", \"Pereira\", , \"rafa.pereira.br@gmail.com\", role = c(\"aut\", \"cre\"), comment = c(ORCID = \"0000-0003-2125-7465\")), person(\"Daniel\", \"Herszenhut\", , \"dhersz@gmail.com\", role = \"aut\", comment = c(ORCID = \"0000-0001-8066-1105\")), person(\"Carlos Kaue Vieira\", \"Braga\", , \"kaue@kauebraga.dev\", role = \"aut\", comment = c(ORCID = \"0000-0002-6104-7297\")), person(\"Matthew Wigginton\", \"Bhagat-Conway\", , \"mwbc@unc.edu\", role = \"aut\", comment = c(ORCID = \"0000-0002-1210-2982\")), person(\"Luyu\", \"Liu\", , \"luyuliu@ufl.edu\", role = \"ctb\", comment = c(ORCID = \"0000-0002-6684-5570\")), person(\"Alex\", \"Magnus\", , \"alex.magnus@mail.utoronto.ca\", role = \"ctb\"), person(\"Daniel\", \"Snow\", , \"dan@sno.ws\", role = \"ctb\"), person(\"Ipea - Institute for Applied Economic Research\", role = c(\"cph\", \"fnd\")), person(\"Department of Geography & Planning, University of Toronto\", role =\"fnd\") )",
       "Description": "Rapid realistic routing on multimodal transport networks (walk, bike, public transport and car) using 'R5', the Rapid Realistic Routing on Real-world and Reimagined networks engine <https://github.com/conveyal/r5>. The package allows users to generate detailed routing analysis or calculate travel time and monetary cost matrices  using seamless parallel computing on top of the R5 Java machine.  While R5 is developed by Conveyal, the package r5r is independently developed by a team at the Institute for Applied Economic Research (Ipea) with contributions from collaborators. Apart from the documentation in this package, users will find additional information on R5 documentation at <https://docs.conveyal.com/>. Although we try to keep new releases of r5r in synchrony with R5, the development of R5 follows Conveyal's independent update process. Hence, users should confirm the R5 version implied by the Conveyal user manual (see <https://docs.conveyal.com/changelog>) corresponds with the R5 version that r5r depends on. This version of r5r depends on R5 v7.1.",
       "License": "MIT + file LICENSE",
       "URL": "https://github.com/ipeaGIT/r5r, https://ipeagit.github.io/r5r/",
@@ -3673,9 +3736,9 @@
       "RoxygenNote": "7.3.2",
       "SystemRequirements": "Java JDK (>= 21.0)",
       "NeedsCompilation": "no",
-      "Author": "Marcus Saraiva [aut] (<https://orcid.org/0000-0001-6218-2338>), Rafael H. M. Pereira [aut, cre] (<https://orcid.org/0000-0003-2125-7465>), Daniel Herszenhut [aut] (<https://orcid.org/0000-0001-8066-1105>), Carlos Kaue Vieira Braga [aut] (<https://orcid.org/0000-0002-6104-7297>), Matthew Wigginton Bhagat-Conway [aut] (<https://orcid.org/0000-0002-1210-2982>), Luyu Liu [ctb] (<https://orcid.org/0000-0002-6684-5570>), Ipea - Institute for Applied Economic Research [cph, fnd]",
+      "Author": "Marcus Saraiva [aut] (ORCID: <https://orcid.org/0000-0001-6218-2338>), Rafael H. M. Pereira [aut, cre] (ORCID: <https://orcid.org/0000-0003-2125-7465>), Daniel Herszenhut [aut] (ORCID: <https://orcid.org/0000-0001-8066-1105>), Carlos Kaue Vieira Braga [aut] (ORCID: <https://orcid.org/0000-0002-6104-7297>), Matthew Wigginton Bhagat-Conway [aut] (ORCID: <https://orcid.org/0000-0002-1210-2982>), Luyu Liu [ctb] (ORCID: <https://orcid.org/0000-0002-6684-5570>), Alex Magnus [ctb], Daniel Snow [ctb], Ipea - Institute for Applied Economic Research [cph, fnd], Department of Geography & Planning, University of Toronto [fnd]",
       "Maintainer": "Rafael H. M. Pereira <rafa.pereira.br@gmail.com>",
-      "Repository": "CRAN"
+      "Repository": "PPM"
     },
     "rJava": {
       "Package": "rJava",
@@ -4339,6 +4402,75 @@
       "Maintainer": "David Cooley <david.cooley.au@gmail.com>",
       "Repository": "https://packagemanager.posit.co/cran/2025-04-14"
     },
+    "shiny": {
+      "Package": "shiny",
+      "Version": "1.10.0",
+      "Source": "Repository",
+      "Type": "Package",
+      "Title": "Web Application Framework for R",
+      "Authors@R": "c( person(\"Winston\", \"Chang\", role = c(\"aut\", \"cre\"), email = \"winston@posit.co\", comment = c(ORCID = \"0000-0002-1576-2126\")), person(\"Joe\", \"Cheng\", role = \"aut\", email = \"joe@posit.co\"), person(\"JJ\", \"Allaire\", role = \"aut\", email = \"jj@posit.co\"), person(\"Carson\", \"Sievert\", role = \"aut\", email = \"carson@posit.co\", comment = c(ORCID = \"0000-0002-4958-2844\")), person(\"Barret\", \"Schloerke\", role = \"aut\", email = \"barret@posit.co\", comment = c(ORCID = \"0000-0001-9986-114X\")), person(\"Yihui\", \"Xie\", role = \"aut\", email = \"yihui@posit.co\"), person(\"Jeff\", \"Allen\", role = \"aut\"), person(\"Jonathan\", \"McPherson\", role = \"aut\", email = \"jonathan@posit.co\"), person(\"Alan\", \"Dipert\", role = \"aut\"), person(\"Barbara\", \"Borges\", role = \"aut\"), person(\"Posit Software, PBC\", role = c(\"cph\", \"fnd\")), person(family = \"jQuery Foundation\", role = \"cph\", comment = \"jQuery library and jQuery UI library\"), person(family = \"jQuery contributors\", role = c(\"ctb\", \"cph\"), comment = \"jQuery library; authors listed in inst/www/shared/jquery-AUTHORS.txt\"), person(family = \"jQuery UI contributors\", role = c(\"ctb\", \"cph\"), comment = \"jQuery UI library; authors listed in inst/www/shared/jqueryui/AUTHORS.txt\"), person(\"Mark\", \"Otto\", role = \"ctb\", comment = \"Bootstrap library\"), person(\"Jacob\", \"Thornton\", role = \"ctb\", comment = \"Bootstrap library\"), person(family = \"Bootstrap contributors\", role = \"ctb\", comment = \"Bootstrap library\"), person(family = \"Twitter, Inc\", role = \"cph\", comment = \"Bootstrap library\"), person(\"Prem Nawaz\", \"Khan\", role = \"ctb\", comment = \"Bootstrap accessibility plugin\"), person(\"Victor\", \"Tsaran\", role = \"ctb\", comment = \"Bootstrap accessibility plugin\"), person(\"Dennis\", \"Lembree\", role = \"ctb\", comment = \"Bootstrap accessibility plugin\"), person(\"Srinivasu\", \"Chakravarthula\", role = \"ctb\", comment = \"Bootstrap accessibility plugin\"), person(\"Cathy\", \"O'Connor\", role = \"ctb\", comment = \"Bootstrap accessibility plugin\"), person(family = \"PayPal, Inc\", role = \"cph\", comment = \"Bootstrap accessibility plugin\"), person(\"Stefan\", \"Petre\", role = c(\"ctb\", \"cph\"), comment = \"Bootstrap-datepicker library\"), person(\"Andrew\", \"Rowls\", role = c(\"ctb\", \"cph\"), comment = \"Bootstrap-datepicker library\"), person(\"Brian\", \"Reavis\", role = c(\"ctb\", \"cph\"), comment = \"selectize.js library\"), person(\"Salmen\", \"Bejaoui\", role = c(\"ctb\", \"cph\"), comment = \"selectize-plugin-a11y library\"), person(\"Denis\", \"Ineshin\", role = c(\"ctb\", \"cph\"), comment = \"ion.rangeSlider library\"), person(\"Sami\", \"Samhuri\", role = c(\"ctb\", \"cph\"), comment = \"Javascript strftime library\"), person(family = \"SpryMedia Limited\", role = c(\"ctb\", \"cph\"), comment = \"DataTables library\"), person(\"John\", \"Fraser\", role = c(\"ctb\", \"cph\"), comment = \"showdown.js library\"), person(\"John\", \"Gruber\", role = c(\"ctb\", \"cph\"), comment = \"showdown.js library\"), person(\"Ivan\", \"Sagalaev\", role = c(\"ctb\", \"cph\"), comment = \"highlight.js library\"), person(family = \"R Core Team\", role = c(\"ctb\", \"cph\"), comment = \"tar implementation from R\") )",
+      "Description": "Makes it incredibly easy to build interactive web applications with R. Automatic \"reactive\" binding between inputs and outputs and extensive prebuilt widgets make it possible to build beautiful, responsive, and powerful applications with minimal effort.",
+      "License": "GPL-3 | file LICENSE",
+      "Depends": [
+        "R (>= 3.0.2)",
+        "methods"
+      ],
+      "Imports": [
+        "utils",
+        "grDevices",
+        "httpuv (>= 1.5.2)",
+        "mime (>= 0.3)",
+        "jsonlite (>= 0.9.16)",
+        "xtable",
+        "fontawesome (>= 0.4.0)",
+        "htmltools (>= 0.5.4)",
+        "R6 (>= 2.0)",
+        "sourcetools",
+        "later (>= 1.0.0)",
+        "promises (>= 1.3.2)",
+        "tools",
+        "crayon",
+        "rlang (>= 0.4.10)",
+        "fastmap (>= 1.1.1)",
+        "withr",
+        "commonmark (>= 1.7)",
+        "glue (>= 1.3.2)",
+        "bslib (>= 0.6.0)",
+        "cachem (>= 1.1.0)",
+        "lifecycle (>= 0.2.0)"
+      ],
+      "Suggests": [
+        "coro (>= 1.1.0)",
+        "datasets",
+        "DT",
+        "Cairo (>= 1.5-5)",
+        "testthat (>= 3.0.0)",
+        "knitr (>= 1.6)",
+        "markdown",
+        "rmarkdown",
+        "ggplot2",
+        "reactlog (>= 1.0.0)",
+        "magrittr",
+        "yaml",
+        "future",
+        "dygraphs",
+        "ragg",
+        "showtext",
+        "sass"
+      ],
+      "URL": "https://shiny.posit.co/, https://github.com/rstudio/shiny",
+      "BugReports": "https://github.com/rstudio/shiny/issues",
+      "Collate": "'globals.R' 'app-state.R' 'app_template.R' 'bind-cache.R' 'bind-event.R' 'bookmark-state-local.R' 'bookmark-state.R' 'bootstrap-deprecated.R' 'bootstrap-layout.R' 'conditions.R' 'map.R' 'utils.R' 'bootstrap.R' 'busy-indicators-spinners.R' 'busy-indicators.R' 'cache-utils.R' 'deprecated.R' 'devmode.R' 'diagnose.R' 'extended-task.R' 'fileupload.R' 'graph.R' 'reactives.R' 'reactive-domains.R' 'history.R' 'hooks.R' 'html-deps.R' 'image-interact-opts.R' 'image-interact.R' 'imageutils.R' 'input-action.R' 'input-checkbox.R' 'input-checkboxgroup.R' 'input-date.R' 'input-daterange.R' 'input-file.R' 'input-numeric.R' 'input-password.R' 'input-radiobuttons.R' 'input-select.R' 'input-slider.R' 'input-submit.R' 'input-text.R' 'input-textarea.R' 'input-utils.R' 'insert-tab.R' 'insert-ui.R' 'jqueryui.R' 'knitr.R' 'middleware-shiny.R' 'middleware.R' 'timer.R' 'shiny.R' 'mock-session.R' 'modal.R' 'modules.R' 'notifications.R' 'priorityqueue.R' 'progress.R' 'react.R' 'reexports.R' 'render-cached-plot.R' 'render-plot.R' 'render-table.R' 'run-url.R' 'runapp.R' 'serializers.R' 'server-input-handlers.R' 'server-resource-paths.R' 'server.R' 'shiny-options.R' 'shiny-package.R' 'shinyapp.R' 'shinyui.R' 'shinywrappers.R' 'showcase.R' 'snapshot.R' 'staticimports.R' 'tar.R' 'test-export.R' 'test-server.R' 'test.R' 'update-input.R' 'utils-lang.R' 'version_bs_date_picker.R' 'version_ion_range_slider.R' 'version_jquery.R' 'version_jqueryui.R' 'version_selectize.R' 'version_strftime.R' 'viewer.R'",
+      "RoxygenNote": "7.3.2",
+      "Encoding": "UTF-8",
+      "RdMacros": "lifecycle",
+      "Config/testthat/edition": "3",
+      "Config/Needs/check": "shinytest2",
+      "NeedsCompilation": "no",
+      "Author": "Winston Chang [aut, cre] (<https://orcid.org/0000-0002-1576-2126>), Joe Cheng [aut], JJ Allaire [aut], Carson Sievert [aut] (<https://orcid.org/0000-0002-4958-2844>), Barret Schloerke [aut] (<https://orcid.org/0000-0001-9986-114X>), Yihui Xie [aut], Jeff Allen [aut], Jonathan McPherson [aut], Alan Dipert [aut], Barbara Borges [aut], Posit Software, PBC [cph, fnd], jQuery Foundation [cph] (jQuery library and jQuery UI library), jQuery contributors [ctb, cph] (jQuery library; authors listed in inst/www/shared/jquery-AUTHORS.txt), jQuery UI contributors [ctb, cph] (jQuery UI library; authors listed in inst/www/shared/jqueryui/AUTHORS.txt), Mark Otto [ctb] (Bootstrap library), Jacob Thornton [ctb] (Bootstrap library), Bootstrap contributors [ctb] (Bootstrap library), Twitter, Inc [cph] (Bootstrap library), Prem Nawaz Khan [ctb] (Bootstrap accessibility plugin), Victor Tsaran [ctb] (Bootstrap accessibility plugin), Dennis Lembree [ctb] (Bootstrap accessibility plugin), Srinivasu Chakravarthula [ctb] (Bootstrap accessibility plugin), Cathy O'Connor [ctb] (Bootstrap accessibility plugin), PayPal, Inc [cph] (Bootstrap accessibility plugin), Stefan Petre [ctb, cph] (Bootstrap-datepicker library), Andrew Rowls [ctb, cph] (Bootstrap-datepicker library), Brian Reavis [ctb, cph] (selectize.js library), Salmen Bejaoui [ctb, cph] (selectize-plugin-a11y library), Denis Ineshin [ctb, cph] (ion.rangeSlider library), Sami Samhuri [ctb, cph] (Javascript strftime library), SpryMedia Limited [ctb, cph] (DataTables library), John Fraser [ctb, cph] (showdown.js library), John Gruber [ctb, cph] (showdown.js library), Ivan Sagalaev [ctb, cph] (highlight.js library), R Core Team [ctb, cph] (tar implementation from R)",
+      "Maintainer": "Winston Chang <winston@posit.co>",
+      "Repository": "CRAN"
+    },
     "slippymath": {
       "Package": "slippymath",
       "Version": "0.3.1",
@@ -4370,6 +4502,28 @@
       "NeedsCompilation": "no",
       "Author": "Miles McBain [aut, cre] (<https://orcid.org/0000-0003-2865-2548>), Michael Sumner [aut]",
       "Maintainer": "Miles McBain <miles.mcbain@gmail.com>",
+      "Repository": "CRAN"
+    },
+    "sourcetools": {
+      "Package": "sourcetools",
+      "Version": "0.1.7-1",
+      "Source": "Repository",
+      "Type": "Package",
+      "Title": "Tools for Reading, Tokenizing and Parsing R Code",
+      "Author": "Kevin Ushey",
+      "Maintainer": "Kevin Ushey <kevinushey@gmail.com>",
+      "Description": "Tools for the reading and tokenization of R code. The 'sourcetools' package provides both an R and C++ interface for the tokenization of R code, and helpers for interacting with the tokenized representation of R code.",
+      "License": "MIT + file LICENSE",
+      "Depends": [
+        "R (>= 3.0.2)"
+      ],
+      "Suggests": [
+        "testthat"
+      ],
+      "RoxygenNote": "5.0.1",
+      "BugReports": "https://github.com/kevinushey/sourcetools/issues",
+      "Encoding": "UTF-8",
+      "NeedsCompilation": "yes",
       "Repository": "CRAN"
     },
     "sp": {
@@ -5384,6 +5538,35 @@
       "Author": "Yihui Xie [aut, cre, cph] (<https://orcid.org/0000-0003-0645-5666>, https://yihui.org), Wush Wu [ctb], Daijiang Li [ctb], Xianying Tan [ctb], Salim Brüggemann [ctb] (<https://orcid.org/0000-0002-5329-5987>), Christophe Dervieux [ctb]",
       "Maintainer": "Yihui Xie <xie@yihui.name>",
       "Repository": "RSPM"
+    },
+    "xtable": {
+      "Package": "xtable",
+      "Version": "1.8-4",
+      "Source": "Repository",
+      "Date": "2019-04-08",
+      "Title": "Export Tables to LaTeX or HTML",
+      "Authors@R": "c(person(\"David B.\", \"Dahl\", role=\"aut\"), person(\"David\", \"Scott\", role=c(\"aut\",\"cre\"), email=\"d.scott@auckland.ac.nz\"), person(\"Charles\", \"Roosen\", role=\"aut\"), person(\"Arni\", \"Magnusson\", role=\"aut\"), person(\"Jonathan\", \"Swinton\", role=\"aut\"), person(\"Ajay\", \"Shah\", role=\"ctb\"), person(\"Arne\", \"Henningsen\", role=\"ctb\"), person(\"Benno\", \"Puetz\", role=\"ctb\"), person(\"Bernhard\", \"Pfaff\", role=\"ctb\"), person(\"Claudio\", \"Agostinelli\", role=\"ctb\"), person(\"Claudius\", \"Loehnert\", role=\"ctb\"), person(\"David\", \"Mitchell\", role=\"ctb\"), person(\"David\", \"Whiting\", role=\"ctb\"), person(\"Fernando da\", \"Rosa\", role=\"ctb\"), person(\"Guido\", \"Gay\", role=\"ctb\"), person(\"Guido\", \"Schulz\", role=\"ctb\"), person(\"Ian\", \"Fellows\", role=\"ctb\"), person(\"Jeff\", \"Laake\", role=\"ctb\"), person(\"John\", \"Walker\", role=\"ctb\"), person(\"Jun\", \"Yan\", role=\"ctb\"), person(\"Liviu\", \"Andronic\", role=\"ctb\"), person(\"Markus\", \"Loecher\", role=\"ctb\"), person(\"Martin\", \"Gubri\", role=\"ctb\"), person(\"Matthieu\", \"Stigler\", role=\"ctb\"), person(\"Robert\", \"Castelo\", role=\"ctb\"), person(\"Seth\", \"Falcon\", role=\"ctb\"), person(\"Stefan\", \"Edwards\", role=\"ctb\"), person(\"Sven\", \"Garbade\", role=\"ctb\"), person(\"Uwe\", \"Ligges\", role=\"ctb\"))",
+      "Maintainer": "David Scott <d.scott@auckland.ac.nz>",
+      "Imports": [
+        "stats",
+        "utils"
+      ],
+      "Suggests": [
+        "knitr",
+        "plm",
+        "zoo",
+        "survival"
+      ],
+      "VignetteBuilder": "knitr",
+      "Description": "Coerce data to LaTeX and HTML tables.",
+      "URL": "http://xtable.r-forge.r-project.org/",
+      "Depends": [
+        "R (>= 2.10.0)"
+      ],
+      "License": "GPL (>= 2)",
+      "Repository": "CRAN",
+      "NeedsCompilation": "no",
+      "Author": "David B. Dahl [aut], David Scott [aut, cre], Charles Roosen [aut], Arni Magnusson [aut], Jonathan Swinton [aut], Ajay Shah [ctb], Arne Henningsen [ctb], Benno Puetz [ctb], Bernhard Pfaff [ctb], Claudio Agostinelli [ctb], Claudius Loehnert [ctb], David Mitchell [ctb], David Whiting [ctb], Fernando da Rosa [ctb], Guido Gay [ctb], Guido Schulz [ctb], Ian Fellows [ctb], Jeff Laake [ctb], John Walker [ctb], Jun Yan [ctb], Liviu Andronic [ctb], Markus Loecher [ctb], Martin Gubri [ctb], Matthieu Stigler [ctb], Robert Castelo [ctb], Seth Falcon [ctb], Stefan Edwards [ctb], Sven Garbade [ctb], Uwe Ligges [ctb]"
     },
     "yaml": {
       "Package": "yaml",

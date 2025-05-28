@@ -136,6 +136,17 @@ list(
     format = "file"
   ),
 
+  # copy gtfs data into osm folder
+  # data had to be downloaded manually due to login requirement of https://nap.transportes.gob.es/
+  tar_target(
+    name = gtfs_data_files,
+    packages = c("fs"),
+    command = copy_gtfs_data(
+      input_dir = "data/input/gtfs",
+      output_dir = osm_pbf_download_dir
+    )
+  ),
+
   # prepare the routing data
   tar_target(
     name = r5_graph_files,
@@ -143,6 +154,7 @@ list(
     packages = c("r5r", "rJavaEnv", "fs"),
     command = prepare_routing_data(
       osm_data = osm_data,
+      gtfs_data = gtfs_data_files,
       elevation_data = elevation_data,
       java_home = java_home,
       r5_jar = r5_jar,
