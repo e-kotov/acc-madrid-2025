@@ -34,7 +34,7 @@ get_gridded_pop_data <- function(
   # x_url <- "https://zenodo.org/records/13916658/files/fgoerlich/HIPGDAC-ES-v1.0.0.zip?download=1"
   # https://www.nature.com/articles/s41597-025-04533-8#Sec7
 
-  # https://ec.europa.eu/eurostat/web/gisco/geodata/population-distribution/geostat
+  # https://ec.europa.eu/eurostat/web/gisco/geodata/population-distribution/population-grids
   # The raster, GeoPackage, and GeoParquet files are in the European Terrestrial Reference System 1989 Lambert Azimuthal Equal Area (ETRS989-LAEA, EPSG:3035) projection.
   x_url <- "https://gisco-services.ec.europa.eu/census/2021/Eurostat_Census-GRID_2021_V2.2.zip"
   save_zip_path <- paste0(input_dir, "/Eurostat_Census-GRID_2021_V2.2.zip")
@@ -175,20 +175,53 @@ get_overture_poi <- function(
 }
 
 
-copy_gtfs_data <- function(
+# copy_gtfs_data <- function(
+#   input_dir = "data/input/gtfs",
+#   output_dir
+# ) {
+#   gtfs_files <- fs::dir_ls(input_dir, type = "file", glob = "*.zip")
+#   fs::file_copy(gtfs_files, output_dir, overwrite = TRUE)
+#   gtfs_files_at_new_path <- fs::dir_ls(
+#     output_dir,
+#     type = "file",
+#     glob = "*.zip"
+#   )
+
+#   return(gtfs_files_at_new_path)
+# }
+
+fix_gtfs_data <- function(
   input_dir = "data/input/gtfs",
   output_dir
 ) {
   gtfs_files <- fs::dir_ls(input_dir, type = "file", glob = "*.zip")
-  fs::file_copy(gtfs_files, output_dir, overwrite = TRUE)
-  gtfs_files_at_new_path <- fs::dir_ls(
-    output_dir,
-    type = "file",
-    glob = "*.zip"
-  )
+  if (!fs::dir_exists(output_dir)) {
+    fs::dir_create(output_dir, recurse = TRUE)
+  }
+  for (i in seq_along(gtfs_files)) {
+    # i <- 4
+    x <- gtfstools::read_gtfs(gtfs_files[[i]])
+    if (nrow(x$frequencies) == 0) {
+      x$frequencies <- NULL
+    } else {
+      if (nrow(x$stop_times) > 0) {
+        x$frequencies <- NULL
+      } else {
+        x <- gtfstools::frequencies_to_stop_times(x)
+      }
+    }
+    gtfstools::write_gtfs(
+      x,
+      path = paste0(output_dir, "/gtfs_", fs::path_file(gtfs_files[[i]])),
+      standard_only = TRUE,
+      quiet = FALSE
+    )
+  }
 
-  return(gtfs_files_at_new_path)
+  new_files_list <- fs::dir_ls(output_dir, type = "file", glob = "*.zip")
+  return(new_files_list)
 }
+
 
 download_elevation_data <- function(
   study_area_boundaries,
@@ -216,4 +249,16 @@ download_elevation_data <- function(
   )
 
   return(elevation_raster_save_path)
+}
+
+gtfs_calendar_dates <- function(
+  input_dir = "data/input/osm"
+) {
+  gtfs_files <- fs::dir_ls(input_dir, type = "file", glob = "*gtfs*.zip")
+
+  gtfs_list <- purrr::map(gtfs_files, gtfstools::read_gtfs)
+  gtfs_calendar <- purrr::map(gtfs_list, ~ .x$calendar)
+  gtfs_calendar_dates$`data/input/osm/gtfs_20240827_130129_CRTM_Cercanias.zip`
+
+  return(gtfs_calendar_dates)
 }

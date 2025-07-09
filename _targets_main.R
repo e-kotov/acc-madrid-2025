@@ -22,6 +22,7 @@ library(targets)
 # setup
 # n_crew_workers <- 5 # set the number of workers for parallel processing
 osm_pbf_download_dir <- "data/input/osm"
+mitms_data_dir <- "data/input/mitms/"
 gridded_pop_input_dir <- "data/input/gridded-pop/"
 gridded_pop_data_dir <- "data/proc/gridded-pop/"
 
@@ -68,6 +69,17 @@ list(
       target_dir = osm_pbf_download_dir
     ),
     format = "file"
+  ),
+
+  # get Madrid MITMS district boundaries
+  tar_target(
+    name = mitms_districts,
+    packages = c("spanishoddata"),
+    command = {
+      spanishoddata::spod_set_data_dir(mitms_data_dir)
+      zones <- spanishoddata::spod_get_zones(zones = "distr", ver = 2)
+      return(zones)
+    }
   ),
 
   # get Madrid boundaries
@@ -138,10 +150,18 @@ list(
 
   # copy gtfs data into osm folder
   # data had to be downloaded manually due to login requirement of https://nap.transportes.gob.es/
+  # tar_target(
+  #   name = gtfs_data_files,
+  #   packages = c("fs"),
+  #   command = copy_gtfs_data(
+  #     input_dir = "data/input/gtfs",
+  #     output_dir = osm_pbf_download_dir
+  #   )
+  # ),
   tar_target(
     name = gtfs_data_files,
     packages = c("fs"),
-    command = copy_gtfs_data(
+    command = fix_gtfs_data(
       input_dir = "data/input/gtfs",
       output_dir = osm_pbf_download_dir
     )
@@ -161,6 +181,19 @@ list(
       memory_limit_gb = getOption("global.r5_build_graph_memory_gb")
     ),
     format = "file"
+  ),
+
+  tar_target(
+    name = locations_with_access,
+    packages = c("r5r", "rJavaEnv", "sf", "dplyr", "tidyr"),
+    command = calculate_access_r5(
+      locations = madrid_gridded_pop,
+      java_home = java_home,
+      r5_jar = r5_jar,
+      r5_graph_files = r5_graph_files,
+      n_threads = getOption("global.r5_nthreads.routing"),
+      memory_limit_gb = getOption("global.r5_build_graph_memory_gb")
+    )
   ),
 
   # tar_target(
