@@ -1,0 +1,53 @@
+graph LR
+  style Legend fill:#FFFFFF00,stroke:#000000;
+  style Graph fill:#FFFFFF00,stroke:#000000;
+  subgraph Legend
+    xf1522833a4d242c5(["Up to date"]):::uptodate
+    xbecb13963f49e50b{{"Object"}}:::none
+    xeb2d7cac8a1ce544>"Function"]:::none
+    xd03d7c7dd2ddda2b(["Regular target"]):::none
+  end
+  subgraph Graph
+    direction LR
+    xf66df4b29067869b(["acc_raster"]):::uptodate --> x7093a545d8e9b20b(["acc_plot"]):::uptodate
+    xc27237c5f1c68114>"plot_acc"]:::uptodate --> x7093a545d8e9b20b(["acc_plot"]):::uptodate
+    xe1ed0155b449ee21(["locations_with_access"]):::uptodate --> xf66df4b29067869b(["acc_raster"]):::uptodate
+    xf14bdc6b9011f699>"convert_acc_to_raster"]:::uptodate --> xf66df4b29067869b(["acc_raster"]):::uptodate
+    xc43c2d807b3a32f0>"r5r_set_cache_dir"]:::uptodate --> xa35abcb1a1ab5ebd>"cache_r5_jar"]:::uptodate
+    xc43c2d807b3a32f0>"r5r_set_cache_dir"]:::uptodate --> x82d82bb2863c916d>"calculate_access_r5"]:::uptodate
+    xc43c2d807b3a32f0>"r5r_set_cache_dir"]:::uptodate --> xb711a5be4dcd4ef2>"calculate_routes_r5"]:::uptodate
+    x3a61b34a7a4b97ac(["madrid_boundaries"]):::uptodate --> x1b9cd111a9c6a7da(["elevation_data"]):::uptodate
+    xeabcb812ea112585{{"osm_pbf_download_dir"}}:::uptodate --> x1b9cd111a9c6a7da(["elevation_data"]):::uptodate
+    xff219f3cde41f368>"download_elevation_data"]:::uptodate --> x1b9cd111a9c6a7da(["elevation_data"]):::uptodate
+    xf66df4b29067869b(["acc_raster"]):::uptodate --> x51f1ba93831ee689(["exported_acc_raster"]):::uptodate
+    xcca3e42b6e5a4514{{"gridded_pop_data_dir"}}:::uptodate --> x1ed29c2034447e33(["gridded_population_parquet"]):::uptodate
+    x78f4fc3dae7410f0{{"gridded_pop_input_dir"}}:::uptodate --> x1ed29c2034447e33(["gridded_population_parquet"]):::uptodate
+    x319aee2c8ae7db88>"get_gridded_pop_data"]:::uptodate --> x1ed29c2034447e33(["gridded_population_parquet"]):::uptodate
+    xeabcb812ea112585{{"osm_pbf_download_dir"}}:::uptodate --> x99be1597dbfa5914(["gtfs_data_files"]):::uptodate
+    xd76ff1a088ff2656>"fix_gtfs_data"]:::uptodate --> x99be1597dbfa5914(["gtfs_data_files"]):::uptodate
+    xfbcb25bcb820be50>"prepare_java_env_for_router"]:::uptodate --> x4794d0df236f484a(["java_home"]):::uptodate
+    x82d82bb2863c916d>"calculate_access_r5"]:::uptodate --> xe1ed0155b449ee21(["locations_with_access"]):::uptodate
+    x4794d0df236f484a(["java_home"]):::uptodate --> xe1ed0155b449ee21(["locations_with_access"]):::uptodate
+    x809b2caccf22aa5a(["madrid_gridded_pop"]):::uptodate --> xe1ed0155b449ee21(["locations_with_access"]):::uptodate
+    xdc679c030c6f6275(["r5_graph_files"]):::uptodate --> xe1ed0155b449ee21(["locations_with_access"]):::uptodate
+    xceede41b995da67c(["r5_jar"]):::uptodate --> xe1ed0155b449ee21(["locations_with_access"]):::uptodate
+    x7a923e0da0b2da56>"extract_gridded_pop"]:::uptodate --> x809b2caccf22aa5a(["madrid_gridded_pop"]):::uptodate
+    x3a61b34a7a4b97ac(["madrid_boundaries"]):::uptodate --> x809b2caccf22aa5a(["madrid_gridded_pop"]):::uptodate
+    x1ed29c2034447e33(["gridded_population_parquet"]):::uptodate --> x809b2caccf22aa5a(["madrid_gridded_pop"]):::uptodate
+    x3d03121ad63ea4f4>"get_overture_poi"]:::uptodate --> x6fa1081b785c8ae6(["madrid_overture_poi"]):::uptodate
+    x3a61b34a7a4b97ac(["madrid_boundaries"]):::uptodate --> x6fa1081b785c8ae6(["madrid_overture_poi"]):::uptodate
+    xeabcb812ea112585{{"osm_pbf_download_dir"}}:::uptodate --> x59737da67548927c(["osm_data"]):::uptodate
+    xd9831dd4f6a62e12>"download_geofabrik_data"]:::uptodate --> x59737da67548927c(["osm_data"]):::uptodate
+    xc43c2d807b3a32f0>"r5r_set_cache_dir"]:::uptodate --> x46785cb81948cc76>"prepare_routing_data"]:::uptodate
+    x4794d0df236f484a(["java_home"]):::uptodate --> xdc679c030c6f6275(["r5_graph_files"]):::uptodate
+    x1b9cd111a9c6a7da(["elevation_data"]):::uptodate --> xdc679c030c6f6275(["r5_graph_files"]):::uptodate
+    x46785cb81948cc76>"prepare_routing_data"]:::uptodate --> xdc679c030c6f6275(["r5_graph_files"]):::uptodate
+    x99be1597dbfa5914(["gtfs_data_files"]):::uptodate --> xdc679c030c6f6275(["r5_graph_files"]):::uptodate
+    x59737da67548927c(["osm_data"]):::uptodate --> xdc679c030c6f6275(["r5_graph_files"]):::uptodate
+    xceede41b995da67c(["r5_jar"]):::uptodate --> xdc679c030c6f6275(["r5_graph_files"]):::uptodate
+    xa35abcb1a1ab5ebd>"cache_r5_jar"]:::uptodate --> xceede41b995da67c(["r5_jar"]):::uptodate
+    x4d5275a4f3968964{{"dirs"}}:::uptodate
+    xc149a4fa6b26878d>"gtfs_calendar_dates"]:::uptodate
+  end
+  classDef uptodate stroke:#000000,color:#ffffff,fill:#354823;
+  classDef none stroke:#000000,color:#000000,fill:#94a4ac;

@@ -1,3 +1,6 @@
 main:
   script: _targets_main.R
   store: _targets/main
+pipeline_plots:
+  script: _targets_pipeline_plots.R
+  store: _targets/pipeline_plots

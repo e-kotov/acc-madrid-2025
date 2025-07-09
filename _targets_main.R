@@ -15,14 +15,13 @@
 
 # Load packages required to define the pipeline:
 library(targets)
+library(geotargets)
 # library(tarchetypes)
-# library(geotargets)
 # library(crew)
 
 # setup
 # n_crew_workers <- 5 # set the number of workers for parallel processing
 osm_pbf_download_dir <- "data/input/osm"
-mitms_data_dir <- "data/input/mitms/"
 gridded_pop_input_dir <- "data/input/gridded-pop/"
 gridded_pop_data_dir <- "data/proc/gridded-pop/"
 
@@ -54,7 +53,7 @@ tar_option_set(
 )
 
 # Import functions from "./R" subfolder
-tar_source()
+tar_source("R/main/")
 
 # All actions to do the analysis are listed below
 list(
@@ -69,17 +68,6 @@ list(
       target_dir = osm_pbf_download_dir
     ),
     format = "file"
-  ),
-
-  # get Madrid MITMS district boundaries
-  tar_target(
-    name = mitms_districts,
-    packages = c("spanishoddata"),
-    command = {
-      spanishoddata::spod_set_data_dir(mitms_data_dir)
-      zones <- spanishoddata::spod_get_zones(zones = "distr", ver = 2)
-      return(zones)
-    }
   ),
 
   # get Madrid boundaries
@@ -196,20 +184,43 @@ list(
     )
   ),
 
-  # tar_target(
-  #   name = trips_and_routes,
-  #   packages = c("r5r", "fs", "dplyr", "rJavaEnv"),
-  #   command = calculate_routes_r5(
-  #     trips = trips_spatially_bound,
-  #     java_home = java_home,
-  #     r5_jar = r5_jar,
-  #     r5_graph_files = r5_graph_files,
-  #     n_threads = getOption("global.r5_nthreads.routing"),
-  #     memory_limit_gb = getOption("global.r5_build_graph_memory_gb")
-  #   )
-  # ),
+  tar_terra_rast(
+    name = acc_raster,
+    packages = c("sf", "dplyr", "terra"),
+    command = convert_acc_to_raster(
+      acc = locations_with_access
+    )
+  ),
 
-  NULL
+  tar_target(
+    name = exported_acc_raster,
+    packages = c("terra", "fs"),
+    command = {
+      out_dir <- "outputs/raster/"
+      fs::dir_create(out_dir, recurse = TRUE)
+
+      outfile <- file.path(out_dir, "acc_raster.tif")
+
+      terra::writeRaster(
+        x = acc_raster,
+        filename = outfile,
+        overwrite = TRUE
+      )
+
+      return(outfile)
+    },
+    format = "file"
+  ),
+
+  tar_target(
+    name = acc_plot,
+    packages = c("terra", "tmap"),
+    command = plot_acc(
+      r = acc_raster,
+      out_dir = "outputs/plots/main/"
+    ),
+    format = "file"
+  )
 )
 
 # targets::tar_visnetwork()
