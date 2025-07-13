@@ -1,14 +1,5 @@
 prepare_java_env_for_router <- function() {
-  java_home <- java_install(
-    java_distrib_path = java_download(version = 21),
-    autoset_java_env = FALSE
-  )
-
-  return(java_home)
-}
-
-prepare_java_env_for_router <- function() {
-  java_home <- java_install(
+  java_home <- rJavaEnv::java_install(
     java_distrib_path = java_download(version = 21),
     autoset_java_env = FALSE
   )
